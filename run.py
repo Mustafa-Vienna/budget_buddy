@@ -2,6 +2,7 @@ import os
 import sys
 import random
 from time import sleep
+from colors import *
 
 class Expense:
     """
@@ -104,9 +105,9 @@ def summarize_spending():
 
 def display_welcome_msg():
     print()
-    print("********************************************")
+    print(f"{Yellow}********************************************")
     print("*                                          *")
-    print("*          Welcome to Budget Buddy!        *")
+    print("*         Welcome to Budget Buddy!         *")
     print("*                                          *")
     print("*    🏠 Calculate your income & expenses   *")
     print("*      on a monthly basis. Print results   *")
@@ -117,17 +118,14 @@ def display_welcome_msg():
     print("*                                          *")
     print("********************************************")
     print()
-    print("Let's see if you are a Richie Rich 💷 or a Brokey Broke 😲 after this month!")
-    print("Prepare for a fun ride through your finances! 🚀🤑＄＄")
+    print(f"{BPurple}Let's see if you are a Richie Rich 💷 or a Brokey Broke 😲 after this month!{Color_Off}")
+    print(f"{BPurple}Prepare for a fun ride through your finances! 🚀🤑＄＄{Color_Off}")
     print()
     sleep(3)
 
-    print("\nLet's calculate your monthly budget based on your income and expenses.")
-    print("\nYou'll see how much you've spent and how much you have left until next salary on the first of the month.")
+    print(f"\n{BGreen}Let's calculate your monthly budget based on your income and expenses.{Color_Off}")
+    print(f"\n{BGreen}You'll see how much you've spent and how much you have left until next salary on the first of the month.{Color_Off}")
 
-# BGreen="\[\033[1;32m\]"       # Green
-# Color_Off="\[\033[0m\]"       # Text Reset
-# Purple="\[\033[0;35m\]"       # Purple
 
 def clear_screen():
     """
@@ -141,9 +139,9 @@ def get_user_confirmation():
     Get user confirmation to start the game
     """
     while True:
-        response = input("\nWould you like to start? (Type 'Y' for Yes, 'N' for No): ")
+        response = input(f"\n{Cyan}Would you like to start? (Type 'Y' for Yes, 'N' for No): {Color_Off}")
         if response.lower() == 'y':
-            print("\nGreat! Let's get started. ")
+            print(f"\n{BGreen}Great! Let's get started.{Color_Off}")
             break
         elif response.lower() == 'n':
             print("\nHave a nice day! Feel free to come back anytime.")
