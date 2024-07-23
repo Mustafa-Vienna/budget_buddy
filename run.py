@@ -18,6 +18,12 @@ class Expense:
         self.category = category
         self.price = price
 
+    def __str__(self):
+        """
+        This method should return a string representation of the object that is user-friendly
+        """
+        return f"Expense(Item: {self.item}, category: {self.category}, price: {self.price:.2f} €)"
+
 def main():
     """
     Start the program and run the main functions.
@@ -31,7 +37,8 @@ def main():
     clear_screen()
 
     # Get user input for expenses
-    register_expense_items()
+    expense = register_expense_items()
+    print(expense)
 
     # Write the file based on the user expenses
     save_expense_to_file()
@@ -70,7 +77,9 @@ def register_expense_items():
         selected_ind = int(input(f"Enter a number [1 - {len(cost_categories)}]: ")) - 1
 
         if selected_ind in range(len(cost_categories)):
-            break
+            selected_category = cost_categories[selected_ind]
+            new_expense = Expense(item=item_name, category=selected_category, price=item_price)
+            return new_expense
         else:
             print("Invalid selection. Please try again! ")
 
