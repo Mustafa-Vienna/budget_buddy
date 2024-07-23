@@ -58,12 +58,7 @@ def summarize_spending():
     """
     print("Summarize user expense")
 
-def clear_screen():
-    """
-    Clear the terminal screen to keep it tidy and display a welcome message.
-    """
-    os.system("cls" if os.name == "nt" else "clear")
-
+def display_welcome_msg():
     print()
     print("********************************************")
     print("*                                          *")
@@ -83,36 +78,49 @@ def clear_screen():
     print()
     sleep(3)
 
+
+# BGreen="\[\033[1;32m\]"       # Green
+# Color_Off="\[\033[0m\]"       # Text Reset
+# Purple="\[\033[0;35m\]"       # Purple
+
+def clear_screen():
+    """
+    Clear the terminal screen to keep it tidy and display a welcome message.
+    """
+    os.system("cls" if os.name == "nt" else "clear")
+    display_welcome_msg()
+
     print("\nLet's calculate your monthly budget based on your income and expenses.")
     print("\nYou'll see how much you've spent and how much you have left until next salary on the first of the month.")
 
+    get_user_confirmation()
 
-    response = input("\nWould you like to start? (Type 'Y' for Yes, 'N' for No): ")
 
-    if response.upper() == 'Y':
-        print("\Great! Let's get started. ")
-    elif response.upper() == 'N':
-        print("\nHave a nice day! Feel free to come back anytime.")
-    else:
-        print("\nInvalid input. Please type 'Y' for Yes or 'N' for No.")
+def get_user_confirmation():
+    """
+    Get user confirmation to start the game
+    """
+    while True:
+        response = input("\nWould you like to start? (Type 'Y' for Yes, 'N' for No): ")
+        if response.lower() == 'y':
+            print("\nGreat! Let's get started. ")
+            user_prompts()
+            break
+        elif response.lower() == 'n':
+            print("\nHave a nice day! Feel free to come back anytime.")
+            break
+        else:
+            print("\nInvalid input. Please type 'Y' for Yes or 'N' for No.")
 
-# I will create a separate function for user confirmation
-# def get_user_confirmation():
-#     """
-#     Get user confirmation to start the game
+def user_prompts():
+    """
+     Prompts the user for their net salary and saving goals, calculates the spendable amount, and prints it.
+    """
+    salary = int(input(f"\nPlease enter you Net-salary: "))
+    saving_goals = int(input(f"\nPlease enter you saving goals: "))
+    spent = salary - saving_goals
+    print(f"Your can spent {spent} €")
 
-#     """
-
-#     while True:
-#         response = input("\nWould you like to start? (Type 'Y' for Yes, 'N' for No): ")
-#         if response.upper() == 'Y':
-#             print("\Great! Let's get started. ")
-#             return True
-#         elif response.upper() == 'N':
-#             print("\nHave a nice day! Feel free to come back anytime.")
-#             return False
-#         else:
-#             print("\nInvalid input. Please type 'Y' for Yes or 'N' for No.")
 
 if __name__ == "__main__":
     main()
