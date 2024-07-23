@@ -40,11 +40,19 @@ def main():
     summarize_spending()
 
 
+# add error handling function
+
+
 def register_expense_items():
     """
     Collect user expense items.
     """
-    print("Collect user expense")
+    print("Please enter the name of your expense item. ")
+    item_name = input("Enter the item name: ")
+    item_price = float(input.__type_params__number(f"Enter the price for {item_name}: "))
+    print(f"You've purchased the item: {item_name} for {item_price} €.")
+
+# add expenses category function
 
 def save_expense_to_file():
     """
