@@ -49,10 +49,33 @@ def register_expense_items():
     """
     print("Please enter the name of your expense item. ")
     item_name = input("Enter the item name: ")
-    item_price = float(input.__type_params__number(f"Enter the price for {item_name}: "))
+    item_price = float(input(f"Enter the price for {item_name}: "))
     print(f"You've purchased the item: {item_name} for {item_price} €.")
 
-# add expenses category function
+    cost_categories = [
+        "🏠  Housing", 
+        "🚗  Transportation", 
+        "🍟  Food", 
+        "💇  Personal", 
+        "👶  Childcare", 
+        "🐈  Pet", 
+        "🎮  Entertainment"
+    ]
+
+    while True:
+        print("Select a category by entering corresponding number: ")
+        for ind, category_name in enumerate(cost_categories):
+            print(f"    {ind + 1}. {category_name}")
+
+        selected_ind = int(input(f"Enter a number [1 - {len(cost_categories)}]: ")) - 1
+
+        if selected_ind in range(len(cost_categories)):
+            break
+        else:
+            print("Invalid selection. Please try again! ")
+
+
+
 
 def save_expense_to_file():
     """
