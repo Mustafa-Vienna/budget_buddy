@@ -36,11 +36,8 @@ def main():
     4. Read the expenses data from the file.
     """
     clear_screen()
-
     display_welcome_msg()
-
     get_user_confirmation()
-
     user_prompts()
 
     # Get user input for expenses
@@ -53,17 +50,13 @@ def main():
     # Read the file and sum the expenses
     summarize_spending()
 
-
-# add error handling function
-
-
 def register_expense_items():
     """
     Collect user expense items.
     """
     print("Please enter the name of your expense item. ")
-    item_name = input("Enter the item name: ")
-    item_price = float(input(f"Enter the price for {item_name}: "))
+    item_name = get_validated_input("Enter the item name (letters only!): ", "alphabets")
+    item_price = float(get_validated_input(f"Enter the price for {item_name} (numbers only!): ", "number"))
     print(f"You've purchased the item: {item_name} for {item_price} €.")
 
     cost_categories = [
@@ -81,7 +74,7 @@ def register_expense_items():
         for ind, category_name in enumerate(cost_categories):
             print(f"    {ind + 1}. {category_name}")
 
-        selected_ind = int(input(f"Enter a number [1 - {len(cost_categories)}]: ")) - 1
+        selected_ind = int(get_validated_input(f"Enter a number [1 - {len(cost_categories)}]: ", "number")) - 1
 
         if selected_ind in range(len(cost_categories)):
             selected_category = cost_categories[selected_ind]
@@ -144,17 +137,45 @@ def get_user_confirmation():
             print(f"\n{BGreen}Great! Let's get started.{Color_Off}")
             break
         elif response.lower() == 'n':
-            print("\nHave a nice day! Feel free to come back anytime.")
+            print(f"\n{BYellow}Have a nice day! Feel free to come back anytime.{Color_Off}")
             sys.exit()
         else:
-            print("\nInvalid input. Please type 'Y' for Yes or 'N' for No.")
+            print(f"\n{BRed}Invalid input. Please type 'Y' for Yes or 'N' for No.{Color_Off}")
+
+def get_validated_input(prompt, input_type):
+    """
+    Validate user input based on the specified input type
+    """
+
+    while True:
+        user_input = input(prompt).strip()
+
+        if not user_input:
+            print("Please enter a value, this field cannot be empty!")
+            continue
+
+        if input_type == 'number':
+            if not user_input.isdigit():
+                print("Please enter numbers only!")
+                continue
+
+        elif input_type == 'alphabets':
+            if not user_input.isalpha():
+                print("Please enter letters only!")
+                continue
+
+        else:
+            print("Invalid type specified. Please enter a valid input type. ")
+            continue
+
+        return user_input
 
 def user_prompts():
     """
      Prompts the user for their net salary and saving goals, calculates the spendable amount, and prints it.
     """
-    salary = int(input(f"\nPlease enter you Net-salary: "))
-    saving_goals = int(input(f"\nPlease enter you saving goals: "))
+    salary = float(get_validated_input("\nPlease enter you Net-salary (numbers only!) : ", "number"))
+    saving_goals = float(get_validated_input("\nPlease enter you saving goals (numbers only!) : ", "number"))
     spent = salary - saving_goals
     print(f"Your can spent {spent} €")
 
