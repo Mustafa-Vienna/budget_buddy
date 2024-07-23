@@ -36,6 +36,12 @@ def main():
     """
     clear_screen()
 
+    display_welcome_msg()
+
+    get_user_confirmation()
+
+    user_prompts()
+
     # Get user input for expenses
     expense = register_expense_items()
     print(expense)
@@ -78,12 +84,10 @@ def register_expense_items():
 
         if selected_ind in range(len(cost_categories)):
             selected_category = cost_categories[selected_ind]
-            new_expense = Expense(item=item_name, category=selected_category, price=item_price)
+            new_expense = Expense(item_name, selected_category, item_price)
             return new_expense
         else:
             print("Invalid selection. Please try again! ")
-
-
 
 
 def save_expense_to_file():
@@ -118,6 +122,8 @@ def display_welcome_msg():
     print()
     sleep(3)
 
+    print("\nLet's calculate your monthly budget based on your income and expenses.")
+    print("\nYou'll see how much you've spent and how much you have left until next salary on the first of the month.")
 
 # BGreen="\[\033[1;32m\]"       # Green
 # Color_Off="\[\033[0m\]"       # Text Reset
@@ -128,12 +134,6 @@ def clear_screen():
     Clear the terminal screen to keep it tidy and display a welcome message.
     """
     os.system("cls" if os.name == "nt" else "clear")
-    display_welcome_msg()
-
-    print("\nLet's calculate your monthly budget based on your income and expenses.")
-    print("\nYou'll see how much you've spent and how much you have left until next salary on the first of the month.")
-
-    get_user_confirmation()
 
 
 def get_user_confirmation():
@@ -144,11 +144,10 @@ def get_user_confirmation():
         response = input("\nWould you like to start? (Type 'Y' for Yes, 'N' for No): ")
         if response.lower() == 'y':
             print("\nGreat! Let's get started. ")
-            user_prompts()
             break
         elif response.lower() == 'n':
             print("\nHave a nice day! Feel free to come back anytime.")
-            break
+            sys.exit()
         else:
             print("\nInvalid input. Please type 'Y' for Yes or 'N' for No.")
 
