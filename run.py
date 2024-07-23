@@ -39,6 +39,7 @@ def main():
     # Read the file and sum the expenses
     summarize_spending()
 
+
 def register_expense_items():
     """
     Collect user expense items.
@@ -84,6 +85,34 @@ def clear_screen():
 
     print("\nLet's calculate your monthly budget based on your income and expenses.")
     print("\nYou'll see how much you've spent and how much you have left until next salary on the first of the month.")
+
+
+    response = input("\nWould you like to start? (Type 'Y' for Yes, 'N' for No): ")
+
+    if response.upper() == 'Y':
+        print("\Great! Let's get started. ")
+    elif response.upper() == 'N':
+        print("\nHave a nice day! Feel free to come back anytime.")
+    else:
+        print("\nInvalid input. Please type 'Y' for Yes or 'N' for No.")
+
+# I will create a separate function for user confirmation
+# def get_user_confirmation():
+#     """
+#     Get user confirmation to start the game
+
+#     """
+
+#     while True:
+#         response = input("\nWould you like to start? (Type 'Y' for Yes, 'N' for No): ")
+#         if response.upper() == 'Y':
+#             print("\Great! Let's get started. ")
+#             return True
+#         elif response.upper() == 'N':
+#             print("\nHave a nice day! Feel free to come back anytime.")
+#             return False
+#         else:
+#             print("\nInvalid input. Please type 'Y' for Yes or 'N' for No.")
 
 if __name__ == "__main__":
     main()
