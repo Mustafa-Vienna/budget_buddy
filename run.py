@@ -56,7 +56,7 @@ def register_expense_items():
     """
     print(f"\n{BYellow}Please enter the name of your expense item.{Color_Off}")
     item_name = get_validated_input(f"\nEnter the item name {Red}(letters only!){Color_Off}: ", "alphabets")
-    item_price = float(get_validated_input(f"\nEnter the price for {item_name} {Red}(numbers only!){Color_Off}: ", "number"))
+    item_price = float(get_validated_input(f"\nEnter the price for {item_name} {Red}(positive numbers only!){Color_Off}: ", "number"))
     print(f"\nYou've purchased the item: {item_name} for {item_price} €.")
 
     cost_categories = [
@@ -155,8 +155,8 @@ def get_validated_input(prompt, input_type):
             continue
 
         if input_type == 'number':
-            if not user_input.isdigit():
-                print(f"\n{Red}Please enter numbers only!{Color_Off}")
+            if not user_input.isdigit() or float(user_input) <= 0:
+                print(f"\n{Red}Please enter positive numbers only!{Color_Off}")
                 continue
 
         elif input_type == 'alphabets':
@@ -174,8 +174,8 @@ def user_prompts():
     """
      Prompts the user for their net salary and saving goals, calculates the spendable amount, and prints it.
     """
-    salary = float(get_validated_input(f"\nPlease enter you Net-salary {Red}(numbers only!){Color_Off} : ", "number"))
-    saving_goals = float(get_validated_input(f"\nPlease enter you saving goals {Red}(numbers only!){Color_Off} : ", "number"))
+    salary = float(get_validated_input(f"\nPlease enter you Net-salary {Red}(positive numbers only!){Color_Off} : ", "number"))
+    saving_goals = float(get_validated_input(f"\nPlease enter you saving goals {Red}(positive numbers only!){Color_Off} : ", "number"))
     spent = salary - saving_goals
     print(f"\n{On_Green}Your can spent {spent} €{Color_Off}")
 
