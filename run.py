@@ -57,7 +57,7 @@ def register_expense_items():
     print(f"\n{BYellow}Please enter the name of your expense item.{Color_Off}")
     item_name = get_validated_input(f"\nEnter the item name {Red}(letters only!){Color_Off}: ", "alphabets")
     item_price = float(get_validated_input(f"\nEnter the price for {item_name} {Red}(positive numbers only!){Color_Off}: ", "number"))
-    print(f"\nYou've purchased the item: {item_name} for {item_price} €.")
+    print(f"\n{BGreen}You've purchased the item: {item_name} for {item_price:.2f} €.{Color_Off}.")
 
     cost_categories = [
         "🏠  Housing", 
@@ -70,11 +70,11 @@ def register_expense_items():
     ]
 
     while True:
-        print("\nSelect a category by entering corresponding number: ")
+        print(f"\n{BPurple}Select a category by entering corresponding number: {Color_Off}")
         for ind, category_name in enumerate(cost_categories):
             print(f"\n    {ind + 1}. {category_name}")
 
-        selected_ind = int(get_validated_input(f"\nEnter a number [1 - {len(cost_categories)}]: ", "number")) - 1
+        selected_ind = int(get_validated_input(f"\n{BYellow}Please enter a number from the available options{Color_Off}[1 - {len(cost_categories)}]: ", "number")) - 1
 
         if selected_ind in range(len(cost_categories)):
             selected_category = cost_categories[selected_ind]
@@ -142,7 +142,8 @@ def get_user_confirmation():
         else:
             print(f"\n{BRed}Invalid input. Please type 'Y' for Yes or 'N' for No.{Color_Off}")
 
-def get_validated_input(prompt, input_type):
+
+def get_validated_input(prompt, input_type, salary=None):
     """
     Validate user input based on the specified input type
     """
@@ -154,30 +155,48 @@ def get_validated_input(prompt, input_type):
             print(f"\n{On_Purple}Please enter a value, this field cannot be empty!{Color_Off}")
             continue
 
-        if input_type == 'number':
-            if not user_input.isdigit() or float(user_input) <= 0:
-                print(f"\n{Red}Please enter positive numbers only!{Color_Off}")
+        try:
+            if input_type == 'number':
+                value = float(user_input)
+                if value <= 0:
+                    print(f"\n{Red}Invalid input. Please enter positive numbers only!{Color_Off}")
+                    continue
+
+            elif input_type == 'salary':
+                value = float(user_input)
+                if value < 1000:
+                    print(f"\n{BRed}Invalid salary.{Color_Off} {Red}Salary must be at least 1000 €!{Color_Off}")
+                    continue
+
+            elif input_type == 'saving_goals':
+                value = float(user_input)
+                if value <= 0 or (salary is not None and value >= salary):
+                    print(f"{BRed}Invalid input.{Color_Off} {Red}Saving goals must be positive and less than the salary {salary} €!{Color_Off}")
+                    continue
+
+            elif input_type == 'alphabets':
+                if not user_input.isalpha():
+                    print(f"\n{Red}Please enter letters only!{Color_Off}")
+                    continue
+
+            else:
+                print(f"\n{BRed}Invalid type specified. Please enter a valid input type.{Color_Off}")
                 continue
 
-        elif input_type == 'alphabets':
-            if not user_input.isalpha():
-                print(f"\n{Red}Please enter letters only!{Color_Off}")
-                continue
+            return user_input
 
-        else:
-            print(f"\n{BRed}Invalid type specified. Please enter a valid input type.{Color_Off}")
+        except ValueError:
+            print(f"\n{Red}Invalid input. Please enter a valid number!{Color_Off}")
             continue
-
-        return user_input
 
 def user_prompts():
     """
      Prompts the user for their net salary and saving goals, calculates the spendable amount, and prints it.
     """
-    salary = float(get_validated_input(f"\nPlease enter you Net-salary {Red}(positive numbers only!){Color_Off} : ", "number"))
-    saving_goals = float(get_validated_input(f"\nPlease enter you saving goals {Red}(positive numbers only!){Color_Off} : ", "number"))
+    salary = float(get_validated_input(f"\nPlease enter your net salary {Red}(minimum 1000 €){Color_Off}: ", "salary"))
+    saving_goals = float(get_validated_input(f"\nPlease enter your saving goals {Red}(must be positive and less than your salary {salary:.2f} €){Color_Off}: ", "saving_goals", salary))
     spent = salary - saving_goals
-    print(f"\n{On_Green}Your can spent {spent} €{Color_Off}")
+    print(f"\n{On_Green}Your can spent {spent:.2f} €{Color_Off}")
 
 
 if __name__ == "__main__":
