@@ -23,7 +23,7 @@ class Expense:
         """
         This method should return a string representation of the object that is user-friendly
         """
-        return f"Expense({Cyan}Item:{Color_Off} {self.item}, {Yellow}category:{Color_Off} {self.category}, {Blue}price:{Color_Off} {self.price:.2f} €)"
+        return f"\nExpense({Cyan}Item:{Color_Off} {self.item}, {Yellow}category:{Color_Off} {self.category}, {Blue}price:{Color_Off} {self.price:.2f} €)"
 
 def main():
     """
@@ -54,10 +54,10 @@ def register_expense_items():
     """
     Collect user expense items.
     """
-    print(f"{BYellow}Please enter the name of your expense item.{Color_Off}")
-    item_name = get_validated_input(f"Enter the item name {Red}(letters only!){Color_Off}: ", "alphabets")
-    item_price = float(get_validated_input(f"Enter the price for {item_name} {Red}(numbers only!){Color_Off}: ", "number"))
-    print(f"You've purchased the item: {item_name} for {item_price} €.")
+    print(f"\n{BYellow}Please enter the name of your expense item.{Color_Off}")
+    item_name = get_validated_input(f"\nEnter the item name {Red}(letters only!){Color_Off}: ", "alphabets")
+    item_price = float(get_validated_input(f"\nEnter the price for {item_name} {Red}(numbers only!){Color_Off}: ", "number"))
+    print(f"\nYou've purchased the item: {item_name} for {item_price} €.")
 
     cost_categories = [
         "🏠  Housing", 
@@ -70,31 +70,31 @@ def register_expense_items():
     ]
 
     while True:
-        print("Select a category by entering corresponding number: ")
+        print("\nSelect a category by entering corresponding number: ")
         for ind, category_name in enumerate(cost_categories):
-            print(f"    {ind + 1}. {category_name}")
+            print(f"\n    {ind + 1}. {category_name}")
 
-        selected_ind = int(get_validated_input(f"Enter a number [1 - {len(cost_categories)}]: ", "number")) - 1
+        selected_ind = int(get_validated_input(f"\nEnter a number [1 - {len(cost_categories)}]: ", "number")) - 1
 
         if selected_ind in range(len(cost_categories)):
             selected_category = cost_categories[selected_ind]
             new_expense = Expense(item_name, selected_category, item_price)
             return new_expense
         else:
-            print(f"{BRed}Invalid selection. Please try again!{Color_Off}")
+            print(f"\n{BRed}Invalid selection. Please try again!{Color_Off}")
 
 
 def save_expense_to_file():
     """
     Save user expense items to a file.
     """
-    print("Save user expense")
+    print("\nSave user expense")
 
 def summarize_spending():
     """
     Summarize user spending from the saved file.
     """
-    print("Summarize user expense")
+    print("\nSummarize user expense\n")
 
 def display_welcome_msg():
     print()
@@ -111,8 +111,8 @@ def display_welcome_msg():
     print("*                                          *")
     print("********************************************")
     print()
-    print(f"{BPurple}Let's see if you are a Richie Rich 💷 or a Brokey Broke 😲 after this month!{Color_Off}")
-    print(f"{BPurple}Prepare for a fun ride through your finances! 🚀🤑＄＄{Color_Off}")
+    print(f"\n{BPurple}Let's see if you are a Richie Rich 💷 or a Brokey Broke 😲 after this month!{Color_Off}")
+    print(f"\n{BPurple}Prepare for a fun ride through your finances! 🚀🤑＄＄{Color_Off}")
     print()
     sleep(3)
 
@@ -137,7 +137,7 @@ def get_user_confirmation():
             print(f"\n{BGreen}Great! Let's get started.{Color_Off}")
             break
         elif response.lower() == 'n':
-            print(f"\n{BYellow}Have a nice day! Feel free to come back anytime.{Color_Off}")
+            print(f"\n{BYellow}Have a nice day! Feel free to come back anytime.{Color_Off}\n")
             sys.exit()
         else:
             print(f"\n{BRed}Invalid input. Please type 'Y' for Yes or 'N' for No.{Color_Off}")
@@ -151,21 +151,21 @@ def get_validated_input(prompt, input_type):
         user_input = input(prompt).strip()
 
         if not user_input:
-            print(f"{On_Purple}Please enter a value, this field cannot be empty!{Color_Off}")
+            print(f"\n{On_Purple}Please enter a value, this field cannot be empty!{Color_Off}")
             continue
 
         if input_type == 'number':
             if not user_input.isdigit():
-                print(f"{Red}Please enter numbers only!{Color_Off}")
+                print(f"\n{Red}Please enter numbers only!{Color_Off}")
                 continue
 
         elif input_type == 'alphabets':
             if not user_input.isalpha():
-                print(f"{Red}Please enter letters only!{Color_Off}")
+                print(f"\n{Red}Please enter letters only!{Color_Off}")
                 continue
 
         else:
-            print(f"{BRed}Invalid type specified. Please enter a valid input type.{Color_Off}")
+            print(f"\n{BRed}Invalid type specified. Please enter a valid input type.{Color_Off}")
             continue
 
         return user_input
@@ -177,7 +177,7 @@ def user_prompts():
     salary = float(get_validated_input(f"\nPlease enter you Net-salary {Red}(numbers only!){Color_Off} : ", "number"))
     saving_goals = float(get_validated_input(f"\nPlease enter you saving goals {Red}(numbers only!){Color_Off} : ", "number"))
     spent = salary - saving_goals
-    print(f"{On_Green}Your can spent {spent} €{Color_Off}")
+    print(f"\n{On_Green}Your can spent {spent} €{Color_Off}")
 
 
 if __name__ == "__main__":
