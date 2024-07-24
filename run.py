@@ -23,7 +23,7 @@ class Expense:
         """
         This method should return a string representation of the object that is user-friendly
         """
-        return f"Expense(Item: {self.item}, category: {self.category}, price: {self.price:.2f} €)"
+        return f"Expense({Cyan}Item:{Color_Off} {self.item}, {Yellow}category:{Color_Off} {self.category}, {Blue}price:{Color_Off} {self.price:.2f} €)"
 
 def main():
     """
@@ -54,9 +54,9 @@ def register_expense_items():
     """
     Collect user expense items.
     """
-    print("Please enter the name of your expense item. ")
-    item_name = get_validated_input("Enter the item name (letters only!): ", "alphabets")
-    item_price = float(get_validated_input(f"Enter the price for {item_name} (numbers only!): ", "number"))
+    print(f"{BYellow}Please enter the name of your expense item.{Color_Off}")
+    item_name = get_validated_input(f"Enter the item name {Red}(letters only!){Color_Off}: ", "alphabets")
+    item_price = float(get_validated_input(f"Enter the price for {item_name} {Red}(numbers only!){Color_Off}: ", "number"))
     print(f"You've purchased the item: {item_name} for {item_price} €.")
 
     cost_categories = [
@@ -81,7 +81,7 @@ def register_expense_items():
             new_expense = Expense(item_name, selected_category, item_price)
             return new_expense
         else:
-            print("Invalid selection. Please try again! ")
+            print(f"{BRed}Invalid selection. Please try again!{Color_Off}")
 
 
 def save_expense_to_file():
@@ -151,21 +151,21 @@ def get_validated_input(prompt, input_type):
         user_input = input(prompt).strip()
 
         if not user_input:
-            print("Please enter a value, this field cannot be empty!")
+            print(f"{On_Purple}Please enter a value, this field cannot be empty!{Color_Off}")
             continue
 
         if input_type == 'number':
             if not user_input.isdigit():
-                print("Please enter numbers only!")
+                print(f"{Red}Please enter numbers only!{Color_Off}")
                 continue
 
         elif input_type == 'alphabets':
             if not user_input.isalpha():
-                print("Please enter letters only!")
+                print(f"{Red}Please enter letters only!{Color_Off}")
                 continue
 
         else:
-            print("Invalid type specified. Please enter a valid input type. ")
+            print(f"{BRed}Invalid type specified. Please enter a valid input type.{Color_Off}")
             continue
 
         return user_input
@@ -174,10 +174,10 @@ def user_prompts():
     """
      Prompts the user for their net salary and saving goals, calculates the spendable amount, and prints it.
     """
-    salary = float(get_validated_input("\nPlease enter you Net-salary (numbers only!) : ", "number"))
-    saving_goals = float(get_validated_input("\nPlease enter you saving goals (numbers only!) : ", "number"))
+    salary = float(get_validated_input(f"\nPlease enter you Net-salary {Red}(numbers only!){Color_Off} : ", "number"))
+    saving_goals = float(get_validated_input(f"\nPlease enter you saving goals {Red}(numbers only!){Color_Off} : ", "number"))
     spent = salary - saving_goals
-    print(f"Your can spent {spent} €")
+    print(f"{On_Green}Your can spent {spent} €{Color_Off}")
 
 
 if __name__ == "__main__":
