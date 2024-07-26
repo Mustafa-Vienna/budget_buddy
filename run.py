@@ -1,6 +1,5 @@
 import os
 import sys
-import random
 from time import sleep
 from colors import *
 
@@ -24,77 +23,13 @@ class Expense:
         This method should return a string representation of the object that is user-friendly
         """
         return f"\nExpense({Cyan}Item:{Color_Off} {self.item}, {Yellow}category:{Color_Off} {self.category}, {Blue}price:{Color_Off} {self.price:.2f} €)"
-
-def main():
+    
+# Utility functions
+def clear_screen():
     """
-    Start the program and run the main functions.
-
-    Steps:
-    1. Show a welcome message.
-    2. Collect user expenses.
-    3. Save expenses to a (CSV) file.
-    4. Read the expenses data from the file.
+    Clear the terminal screen to keep it tidy and display a welcome message.
     """
-    clear_screen()
-    display_welcome_msg()
-    get_user_confirmation()
-    user_prompts()
-
-    # Get user input for expenses
-    expense = register_expense_items()
-    print(expense)
-
-    # Write the file based on the user expenses
-    save_expense_to_file()
-
-    # Read the file and sum the expenses
-    summarize_spending()
-
-def register_expense_items():
-    """
-    Collect user expense items.
-    """
-    print(f"\n{BYellow}Please enter the name of your expense item.{Color_Off}")
-    item_name = get_validated_input(f"\nEnter the item name {Red}(letters only!){Color_Off}: ", "alphabets")
-    item_price = float(get_validated_input(f"\nEnter the price for {item_name} {Red}(positive numbers only!){Color_Off}: ", "number"))
-    print(f"\n{BGreen}You've purchased the item: {item_name} for {item_price:.2f} €.{Color_Off}.")
-
-    cost_categories = [
-        "🏠  Housing", 
-        "🚗  Transportation", 
-        "🍟  Food", 
-        "💇  Personal", 
-        "👶  Childcare", 
-        "🐈  Pet", 
-        "🎮  Entertainment"
-    ]
-
-    while True:
-        print(f"\n{BPurple}Select a category by entering corresponding number: {Color_Off}")
-        for ind, category_name in enumerate(cost_categories):
-            print(f"\n    {ind + 1}. {category_name}")
-
-        selected_ind = int(get_validated_input(f"\n{BYellow}Please enter a number from the available options{Color_Off}[1 - {len(cost_categories)}]: ", "number")) - 1
-
-        if selected_ind in range(len(cost_categories)):
-            selected_category = cost_categories[selected_ind]
-            new_expense = Expense(item_name, selected_category, item_price)
-            return new_expense
-        else:
-            print(f"\n{BRed}Invalid selection. Please try again!{Color_Off}")
-
-
-def save_expense_to_file():
-    """
-    Save user expense items to a file.
-    """
-    print("\nSave user expense")
-
-def summarize_spending():
-    """
-    Summarize user spending from the saved file.
-    """
-    print("\nSummarize user expense\n")
+    os.system("cls" if os.name == "nt" else "clear")
 
 def display_welcome_msg():
     print()
@@ -114,19 +49,16 @@ def display_welcome_msg():
     print(f"\n{BPurple}Let's see if you are a Richie Rich 💷 or a Brokey Broke 😲 after this month!{Color_Off}")
     print(f"\n{BPurple}Prepare for a fun ride through your finances! 🚀🤑＄＄{Color_Off}")
     print()
-    sleep(3)
-
+    sleep(0.5)
     print(f"\n{BGreen}Let's calculate your monthly budget based on your income and expenses.{Color_Off}")
     print(f"\n{BGreen}You'll see how much you've spent and how much you have left until next salary on the first of the month.{Color_Off}")
 
 
-def clear_screen():
-    """
-    Clear the terminal screen to keep it tidy and display a welcome message.
-    """
-    os.system("cls" if os.name == "nt" else "clear")
-
-
+'''
+This function will be reused to start additional rounds of adding items.
+After completing the first round of adding expenses/items, it will be called again
+to allow the user to continue adding more items until the remaining budget is exhausted
+'''
 def get_user_confirmation():
     """
     Get user confirmation to start the game
@@ -142,62 +74,149 @@ def get_user_confirmation():
         else:
             print(f"\n{BRed}Invalid input. Please type 'Y' for Yes or 'N' for No.{Color_Off}")
 
-
-def get_validated_input(prompt, input_type, salary=None):
+# Input validation functions
+def get_validated_input(prompt, validation_function, *args):
     """
-    Validate user input based on the specified input type
+    Validate user input using the specified validation function
     """
-
     while True:
         user_input = input(prompt).strip()
-
         if not user_input:
             print(f"\n{On_Purple}Please enter a value, this field cannot be empty!{Color_Off}")
             continue
+        if validation_function(user_input, *args):
+            return float(user_input) if validation_function in [check_number, check_salary, check_saving_goals, check_item_price] else user_input
 
-        try:
-            if input_type == 'number':
-                value = float(user_input)
-                if value <= 0:
-                    print(f"\n{Red}Invalid input. Please enter positive numbers only!{Color_Off}")
-                    continue
+def check_number(value):
+    """
+    Validate that the input is a positive number.
+    """
+    try:
+        value = float(value)
+        if value <= 0:
+            print(f"\n{Red}Invalid input. Please enter positive numbers only!{Color_Off}")
+            return False
+        return True
+    except ValueError:
+        print(f"\n{Red}Invalid input. Please enter a valid number!{Color_Off}")
+        return False
 
-            elif input_type == 'salary':
-                value = float(user_input)
-                if value < 1000:
-                    print(f"\n{BRed}Invalid salary.{Color_Off} {Red}Salary must be at least 1000 €!{Color_Off}")
-                    continue
+def check_salary(value):
+    """
+    Validate that the salary input is a number and at least 1000 €.
+    Because Austrian minimum wage in 2024 is €1,766.92 per month before taxes for full-time work
+    """
+    try:
+        value = float(value)
+        if value < 1000:
+            print(f"\n{BRed}Invalid salary.{Color_Off} {Red}Salary must be at least 1000 €!{Color_Off}")
+            return False
+        return True
+    except ValueError:
+        print(f"\n{Red}Invalid input. Please enter a valid number!{Color_Off}")
+        return False
 
-            elif input_type == 'saving_goals':
-                value = float(user_input)
-                if value <= 0 or (salary is not None and value >= salary):
-                    print(f"{BRed}Invalid input.{Color_Off} {Red}Saving goals must be positive and less than the salary {salary} €!{Color_Off}")
-                    continue
+def check_saving_goals(value, salary):
+    """
+    Validate that the saving goals input is a positive number less than the salary
+    """
+    try:
+        value = float(value)
+        if value <= 0 or value >= salary:
+            print(f"{BRed}Invalid input.{Color_Off} {Red}Saving goals must be positive and less than the salary {salary} €!{Color_Off}")
+            return False
+        return True
+    except ValueError:
+        print(f"\n{Red}Invalid input. Please enter a valid number!{Color_Off}")
+        return False
 
-            elif input_type == 'alphabets':
-                if not user_input.isalpha():
-                    print(f"\n{Red}Please enter letters only!{Color_Off}")
-                    continue
+def check_item_price(value, remaining_budget):
+    """
+    Validate that the item price is a positive number less than the remaining budget
+    """
+    try:
+        value = float(value)
+        if value <= 0 or value >= remaining_budget:
+            print(f"{BRed}Invalid input.{Color_Off} {Red}Item price must be positive and less than the remaining budget {remaining_budget:.2f} €!{Color_Off}")
+            return False
+        return True
+    except ValueError:
+        print(f"\n{Red}Invalid input. Please enter a valid number!{Color_Off}")
+        return False
 
-            else:
-                print(f"\n{BRed}Invalid type specified. Please enter a valid input type.{Color_Off}")
-                continue
+def check_alphabets(value):
+    """
+    Validate that the input consists only of alphabets.
+    """
+    if not value.isalpha():
+        print(f"\n{Red}Please enter letters only!{Color_Off}")
+        return False
+    return True
 
-            return user_input
-
-        except ValueError:
-            print(f"\n{Red}Invalid input. Please enter a valid number!{Color_Off}")
-            continue
-
+# Main logic functions
 def user_prompts():
     """
-     Prompts the user for their net salary and saving goals, calculates the spendable amount, and prints it.
+    Prompts the user for their net salary and saving goals, calculates the spendable amount, and prints it.
     """
-    salary = float(get_validated_input(f"\nPlease enter your net salary {Red}(minimum 1000 €){Color_Off}: ", "salary"))
-    saving_goals = float(get_validated_input(f"\nPlease enter your saving goals {Red}(must be positive and less than your salary {salary:.2f} €){Color_Off}: ", "saving_goals", salary))
+    salary = get_validated_input(f"\nPlease enter your net salary {Red}(minimum 1000 €){Color_Off}: ", check_salary)
+    saving_goals = get_validated_input(f"\nPlease enter your saving goals {Red}(must be positive and less than your salary {salary:.2f} €){Color_Off}: ", check_saving_goals, salary)
     spent = salary - saving_goals
-    print(f"\n{On_Green}Your can spent {spent:.2f} €{Color_Off}")
+    print(f"\n{On_Green}You have {spent:.2f} € remaining in your budget.{Color_Off}")
+    return salary, saving_goals, spent
+
+def register_expense_items(salary, saving_goals):
+    """
+    Collect user expense items.
+    """
+    print(f"\n{BYellow}Please enter the name of your expense item.{Color_Off}")
+    item_name = get_validated_input(f"\nEnter the item name {Red}(letters only!){Color_Off}: ", check_alphabets)
+    remaining_budget = salary - saving_goals
+    item_price = get_validated_input(f"\nEnter the price for {item_name} {Red}(positive numbers only!){Color_Off}: ", check_item_price, remaining_budget)
+    print(f"\n{BGreen}You've purchased the item: {item_name} for {item_price:.2f} €.{Color_Off}.")
+
+    cost_categories = [
+        "🏠  Housing",
+        "🚗  Transportation",
+        "🍟  Food",
+        "💇  Personal",
+        "👶  Childcare",
+        "🐈  Pet",
+        "🎮  Entertainment"
+    ]
+
+    while True:
+        print(f"\n{BPurple}Select a category by entering corresponding number: {Color_Off}")
+        for ind, category_name in enumerate(cost_categories):
+            print(f"\n    {ind + 1}. {category_name}")
+
+        selected_ind = int(get_validated_input(f"\n{BYellow}Please enter a number from the available options{Color_Off}[1 - {len(cost_categories)}]: ", check_number)) - 1
+
+        if selected_ind in range(len(cost_categories)):
+            selected_category = cost_categories[selected_ind]
+            new_expense = Expense(item_name, selected_category, item_price)
+            return new_expense
+        else:
+            print(f"\n{BRed}Invalid selection. Please try again!{Color_Off}")
+
+def main():
+    """
+    Start the program and run the main functions.
+    """
+    clear_screen()
+    display_welcome_msg()
+    get_user_confirmation()
+    salary, saving_goals, spent = user_prompts()
+
+    # The first round of adding items 
+    expense = register_expense_items(salary, saving_goals)
+    print(expense)
 
 
+    # will implement conditional statements here for more items
+    #code.........
+
+
+
+# run the app only when we run it directly instead of importing it
 if __name__ == "__main__":
     main()
