@@ -109,7 +109,7 @@ def check_salary(value):
     try:
         value = float(value)
         if value < 1000:
-            print(f"\n{BRed}Invalid salary.{Color_Off} {Red}Salary must be at least 1000 €!{Color_Off}")
+            raise ValueError(f"\n{BRed}Invalid salary.{Color_Off} {Red}Salary must be at least 1000 €!{Color_Off}")
             return False
         return True
     except ValueError:
@@ -123,12 +123,13 @@ def check_saving_goals(value, salary):
     try:
         value = float(value)
         if value <= 0 or value >= salary:
-            print(f"{BRed}Invalid input.{Color_Off} {Red}Saving goals must be positive and less than the salary {salary} €!{Color_Off}")
+            raise ValueError(f"{BRed}Invalid input.{Color_Off} {Red}Saving goals must be positive and less than the salary {salary} €!{Color_Off}")
             return False
         return True
     except ValueError:
         print(f"\n{Red}Invalid input. Please enter a valid number!{Color_Off}")
         return False
+
 
 def check_item_price(value, remaining_budget):
     """
@@ -153,16 +154,6 @@ def check_alphabets(value):
         return False
     return True
 
-# Main logic functions
-def user_prompts():
-    """
-    Prompts the user for their net salary and saving goals, calculates the spendable amount, and prints it.
-    """
-    salary = get_validated_input(f"\nPlease enter your net salary {Red}(minimum 1000 €){Color_Off}: ", check_salary)
-    saving_goals = get_validated_input(f"\nPlease enter your saving goals {Red}(must be positive and less than your salary {salary:.2f} €){Color_Off}: ", check_saving_goals, salary)
-    spent = salary - saving_goals
-    print(f"\n{On_Green}You have {spent:.2f} € remaining in your budget.{Color_Off}")
-    return salary, saving_goals, spent
 
 def register_expense_items(salary, saving_goals):
     """
@@ -205,7 +196,11 @@ def main():
     clear_screen()
     display_welcome_msg()
     get_user_confirmation()
-    salary, saving_goals, spent = user_prompts()
+
+    salary = get_validated_input(f"\nPlease enter your net salary {Red}(minimum 1000 €){Color_Off}: ", check_salary)
+    saving_goals = get_validated_input(f"\nPlease enter your saving goals {Red}(must be positive and less than your salary {salary:.2f} €){Color_Off}: ", check_saving_goals, salary)
+    available_budget = salary - saving_goals
+    print(f"\n{On_Green}You have {available_budget:.2f} € available in your budget.{Color_Off}")
 
     # The first round of adding items 
     expense = register_expense_items(salary, saving_goals)
