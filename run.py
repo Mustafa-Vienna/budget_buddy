@@ -209,7 +209,29 @@ def main():
 
     # will implement conditional statements here for more items
     #code.........
+    running = True
 
+    while running:
+         
+        expense = register_expense_items(available_budget, saving_goals)
+        print(expense)
+        available_budget -= expense.price
+        print(f"\n{On_Green}You have {available_budget:.2f} € remaining in your budget.{Color_Off}")
+
+        if available_budget <= 0:
+            print(f"\n{BRed}Insufficient funds remaining in your budget!{Color_Off}")
+            break
+
+
+        running_response = input(f"\{Cyan}nWould you like to add another item? (Type 'Y' for Yes, 'N' for No): {Color_Off}")
+        if running_response.lower() == "Y":
+             running = True
+        elif running_response.lower() == "N":
+            running = False
+            print(f"\n{BYellow}Thanks for using Budget-Buddy! Feel free to visit again anytime.{Color_Off}")
+        else:
+            running = False
+            print(f"\n{BRed}Invalid input. Please type 'Y' for Yes or 'N' for No.{Color_Off}")
 
 
 # run the app only when we run it directly instead of importing it
