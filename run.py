@@ -54,21 +54,16 @@ def display_welcome_msg():
     print(f"\n{BGreen}You'll see how much you've spent and how much you have left until next salary on the first of the month.{Color_Off}")
 
 
-'''
-This function will be reused to start additional rounds of adding items.
-After completing the first round of adding expenses/items, it will be called again
-to allow the user to continue adding more items until the remaining budget is exhausted
-'''
 def get_user_confirmation():
     """
     Get user confirmation to start the game
     """
     while True:
         response = input(f"\n{Cyan}Would you like to start? (Type 'Y' for Yes, 'N' for No): {Color_Off}")
-        if response.lower() == 'y':
+        if response.lower().strip() == 'y':
             print(f"\n{BGreen}Great! Let's get started.{Color_Off}")
             break
-        elif response.lower() == 'n':
+        elif response.lower().strip() == 'n':
             print(f"\n{BYellow}Have a nice day! Feel free to come back anytime.{Color_Off}\n")
             sys.exit()
         else:
@@ -137,7 +132,7 @@ def check_item_price(value, remaining_budget):
     """
     try:
         value = float(value)
-        if value <= 0 or value >= remaining_budget:
+        if value <= 0 or value > remaining_budget:
             print(f"{BRed}Invalid input.{Color_Off} {Red}Item price must be positive and less than the remaining budget {remaining_budget:.2f} €!{Color_Off}")
             return False
         return True
@@ -155,13 +150,12 @@ def check_alphabets(value):
     return True
 
 
-def register_expense_items(salary, saving_goals):
+def register_expense_items(remaining_budget):
     """
     Collect user expense items.
     """
     print(f"\n{BYellow}Please enter the name of your expense item.{Color_Off}")
     item_name = get_validated_input(f"\nEnter the item name {Red}(letters only!){Color_Off}: ", check_alphabets)
-    remaining_budget = salary - saving_goals
     item_price = get_validated_input(f"\nEnter the price for {item_name} {Red}(positive numbers only!){Color_Off}: ", check_item_price, remaining_budget)
     print(f"\n{BGreen}You've purchased the item: {item_name} for {item_price:.2f} €.{Color_Off}.")
 
@@ -177,17 +171,34 @@ def register_expense_items(salary, saving_goals):
 
     while True:
         print(f"\n{BPurple}Select a category by entering corresponding number: {Color_Off}")
-        for ind, category_name in enumerate(cost_categories):
-            print(f"\n    {ind + 1}. {category_name}")
+        for index, category_name in enumerate(cost_categories):
+            print(f"\n    {index + 1}. {category_name}")
 
-        selected_ind = int(get_validated_input(f"\n{BYellow}Please enter a number from the available options{Color_Off}[1 - {len(cost_categories)}]: ", check_number)) - 1
+        selected_index = int(get_validated_input(f"\n{BYellow}Please enter a number from the available options{Color_Off}[1 - {len(cost_categories)}]: ", check_number)) - 1
 
-        if selected_ind in range(len(cost_categories)):
-            selected_category = cost_categories[selected_ind]
-            new_expense = Expense(item_name, selected_category, item_price)
-            return new_expense
+        if selected_index in range(len(cost_categories)):
+            selected_category = cost_categories[selected_index]
+            return Expense(item_name, selected_category, item_price)
         else:
             print(f"\n{BRed}Invalid selection. Please try again!{Color_Off}")
+
+
+def add_new_expenses():
+    """
+    This function Ask user to add more expenses
+    """
+
+    while True:
+        response = input(f"\n{Cyan}Would you like to add another item? : (Type 'Y' for Yes, 'N' for No){Color_Off}")
+        if response.lower().strip() == 'y':
+            print(f"\n{BGreen}Great! Let's get continue.{Color_Off}")
+            return True
+        elif response.lower().strip() == 'N':
+            print(f"\n{BYellow}Have a nice day! Feel free to come back anytime.{Color_Off}\n")
+            sys.exit
+        else:
+            print(f"{BRed}Invalid input. Please type 'Y' for Yes or 'N' for No.{Color_Off}")
+
 
 def main():
     """
@@ -197,41 +208,63 @@ def main():
     display_welcome_msg()
     get_user_confirmation()
 
+    # Initialize variables
     salary = get_validated_input(f"\nPlease enter your net salary {Red}(minimum 1000 €){Color_Off}: ", check_salary)
-    saving_goals = get_validated_input(f"\nPlease enter your saving goals {Red}(must be positive and less than your salary {salary:.2f} €){Color_Off}: ", check_saving_goals, salary)
+    saving_goals = get_validated_input(f"nPlease enter your saving goals {Red}(must be positive and less than your salary {salary:.2f} €){Color_Off}: ", check_saving_goals, salary)
     available_budget = salary - saving_goals
-    print(f"\n{On_Green}You have {available_budget:.2f} € available in your budget.{Color_Off}")
+    expenses = []
 
-    # The first round of adding items 
-    expense = register_expense_items(salary, saving_goals)
-    print(expense)
+    while True:
+        print(f"{BYellow}You have {available_budget:.2f} € remaining in your budget.{Color_Off}")
+        expense = register_expense_items(available_budget)
+        expenses.append(expense)
+        available_budget -= expense.price # Deduct the price from the available budget
 
-
-    # will implement conditional statements here for more items
-    #code.........
-    running = True
-
-    while running:
-         
-        expense = register_expense_items(available_budget, saving_goals)
-        print(expense)
-        available_budget -= expense.price
-        print(f"\n{On_Green}You have {available_budget:.2f} € remaining in your budget.{Color_Off}")
-
+        print(f"\n{BGreen}Remaining budget: {available_budget:.2f} €{Color_Off}")
         if available_budget <= 0:
-            print(f"\n{BRed}Insufficient funds remaining in your budget!{Color_Off}")
+            print(f"\n{BRed}No more budget left!{Color_Off}")
             break
+        if not add_new_expenses():
+            break
+        print(f"\n{BPurple}Here are your registered expenses:{Color_Off}")
+        for exp in expenses:
+            print(exp)
+        print(f"\n{BGreen}Remaining budget: {available_budget:.2f} €{Color_Off}")
+
+ 
+     
+
+    # while running:
+
+    #     salary = get_validated_input(f"\nPlease enter your net salary {Red}(minimum 1000 €){Color_Off}: ", check_salary)
+    #     saving_goals = get_validated_input(f"\nPlease enter your saving goals {Red}(must be positive and less than your salary {salary:.2f} €){Color_Off}: ", check_saving_goals, salary)
+    #     available_budget = salary - saving_goals
+    #     print(f"\n{On_Green}You have {available_budget:.2f} € available in your budget.{Color_Off}")
+
+    #     # The first round of adding items 
+    #     expense = register_expense_items(salary, saving_goals)
+    #     print(expense)
+
+         
+    # expense = register_expense_items(available_budget, saving_goals)
+    # print(expense)
+    # available_budget -= expense.price
+    # print(f"\n{On_Green}You have {available_budget:.2f} € remaining in your budget.{Color_Off}")
+
+    # if available_budget <= 0:
+    #     print(f"\n{BRed}Insufficient funds remaining in your budget!{Color_Off}")
+    #     break
 
 
-        running_response = input(f"\{Cyan}nWould you like to add another item? (Type 'Y' for Yes, 'N' for No): {Color_Off}")
-        if running_response.lower() == "Y":
-             running = True
-        elif running_response.lower() == "N":
-            running = False
-            print(f"\n{BYellow}Thanks for using Budget-Buddy! Feel free to visit again anytime.{Color_Off}")
-        else:
-            running = False
-            print(f"\n{BRed}Invalid input. Please type 'Y' for Yes or 'N' for No.{Color_Off}")
+    # running_response = input(f"\{Cyan}nWould you like to add another item? (Type 'Y' for Yes, 'N' for No): {Color_Off}")
+    # if running_response.lower() == "Y":
+    #         running = True
+    # elif running_response.lower() == "N":
+    #     running = False
+    #     print(f"\n{BYellow}Thanks for using Budget-Buddy! Feel free to visit again anytime.{Color_Off}")
+    # else:
+    #     running = False
+    #     print(f"\n{BRed}Invalid input. Please type 'Y' for Yes or 'N' for No.{Color_Off}")
 
 
 # run the app only when we run it directly instead of importing it
