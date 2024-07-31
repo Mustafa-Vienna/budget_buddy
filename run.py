@@ -173,7 +173,7 @@ def check_saving_goals(value, salary):
             raise ValueError(
                             f"{BRed}Invalid input.{Color_Off} "
                             f"{Red}Saving goals must be positive and less"
-                            f" than the salary {salary} €!{Color_Off}"
+                            f" than the salary {salary}€{Color_Off}"
                             )
             return False
         return True
@@ -225,8 +225,8 @@ def register_expense_items(remaining_budget):
     item_price = get_validated_input(
                 f"\nEnter the price for {item_name} "
                 f"{Red}(positive numbers only!){Color_Off}:",
-                    check_item_price,
-                    remaining_budget)
+                check_item_price,
+                remaining_budget)
     print(
         f"\n{BGreen}You've purchased the item: {item_name} for "
         f"{item_price:.2f} €.{Color_Off}."
@@ -307,8 +307,8 @@ def main():
         check_salary)
     saving_goals = get_validated_input(
         f"\nPlease enter your saving goals {Red}"
-        f"(must be positive and less than your "
-        f"salary {salary:.2f} €){Color_Off}: ",
+        f"(must be positive and less than your"
+        f"salary {salary:.2f}€){Color_Off}: ",
         check_saving_goals,
         salary)
     available_budget = salary - saving_goals
