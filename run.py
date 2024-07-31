@@ -239,7 +239,8 @@ def register_expense_items(remaining_budget):
         "💇  Personal",
         "👶  Childcare",
         "🐈  Pet",
-        "🎮  Entertainment"
+        "🎮  Entertainment",
+        "💰  Other"
     ]
 
     while True:
