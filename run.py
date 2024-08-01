@@ -145,6 +145,10 @@ def check_salary(value):
             raise ValueError(
                 f"\n{BRed}Invalid salary.{Off} {Red}Minimum is 1000 €!{Off}")
             return False
+        elif not (1000 <= value <= 9999):
+            print(f"\n{Purple}Enter a reasonable monthly "
+                  f"salary{Off} {BRed}(between 1000 and 9999). {Off}")
+            return False
         return True
     except ValueError:
         print_invalid_num("Invalid input. Enter a valid number!")
@@ -187,12 +191,16 @@ def check_item_price(value, remaining_budget):
         return False
 
 
-def check_alphabets(value):
+def check_alphabets(item_name):
     """
     Validate that the input consists only of alphabets.
     """
-    if not all(char.isalpha() or char.isspace() for char in value):
+    if not all(char.isalpha() or char.isspace() for char in item_name):
         print(f"\n{Red}Enter letters and spaces only!{Off}")
+        return False
+    elif not 2 <= len(item_name) <= 15:
+        print(f"\n{Red}Item name must be more then 2 letters "
+              f"and less then 15 numbers including spaces. {Off}")
         return False
     return True
 
@@ -203,7 +211,8 @@ def register_expense_items(remaining_budget):
     """
     print(f"\n{BYellow}Enter the name of your expense item.{Off}")
     item_name = get_validated_input(
-                f"\nEnter the item name: ",
+                f"\nEnter the item name {Red}"
+                f"(Letters and spaces only){Off}: ",
                 check_alphabets
                 )
     item_price = get_validated_input(
@@ -284,7 +293,7 @@ def main():
         f"\nEnter your monthly net salary: {Red}(minimum 1000 €){Off}: ",
         check_salary)
     saving_goals = get_validated_input(
-        f"\nEnter your saving goals {Red} (Must be less than "
+        f"\nEnter your saving goals {Cyan} (Must be less than "
         f"salary {salary:.2f}€){Off}: ",
         check_saving_goals,
         salary)
