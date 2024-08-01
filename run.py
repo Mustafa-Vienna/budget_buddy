@@ -58,9 +58,6 @@ def display_welcome_msg():
         f"\n{BPurple}Let's see if you are a Richie Rich  💷  or a "
         f" Brokey Broke  😲  {Off}"
         )
-    print(
-        f"\n{BPurple}Richie Rich 💷  or Brokey Broke 😲   Let's find out!{Off}"
-        )
     print()
     sleep(0.5)
     print(
