@@ -74,21 +74,15 @@ def get_user_confirmation():
     Get user confirmation to start the game
     """
     while True:
-        response = input(
-            f"\n{Cyan}Start the game? (y/n): {Off}\n"
-            )
+        response = input(f"\n{Cyan}Start the game? (y/n): {Off}")
         if response.lower().strip() == 'y':
             print(f"\n{BGreen}Great! Let's started.{Off}\n")
             break
         elif response.lower().strip() == 'n':
-            print(
-                f"\n{BYellow}Goodbye! Come back anytime.{Off}\n"
-                )
+            print(f"\n{BYellow}Goodbye! Come back anytime.{Off}\n")
             sys.exit()
         else:
-            print(
-                f"\n{BRed}Invalid input. Type 'y' or 'n'.{Off}\n"
-                )
+            print(f"\n{BRed}Invalid input. Type 'y' or 'n'.{Off}\n")
 
 
 def print_invalid_num(msg):
@@ -131,9 +125,7 @@ def check_number(value):
     try:
         value = float(value)
         if value <= 0:
-            print(
-                f"\n{Red}Error. Enter positive numbers only!{Off}"
-                )
+            print(f"\n{Red}Error. Enter positive numbers only!{Off}")
             return False
         return True
     except ValueError:
@@ -167,10 +159,8 @@ def check_saving_goals(value, salary):
     try:
         value = float(value)
         if value <= 0 or value >= salary:
-            raise ValueError(
-                            f"{BRed}Invalid input.{Off} "
-                            f"{Red}Must be less than salary. {salary}€{Off}"
-                            )
+            raise ValueError(f"{BRed}Invalid input.{Off} "
+                             f"{Red}Must be less than salary. {salary}€{Off}")
             return False
         return True
     except ValueError:
@@ -267,16 +257,14 @@ def add_new_expenses(expenses):
     """
 
     while True:
-        response = input(
-            f"\n{Cyan}Add another item? (y/n) : {Off}")
+        response = input(f"\n{Cyan}Add another item? (y/n) : {Off}")
         if response.lower().strip() == 'y':
             print(f"\n{BGreen}Great! Let's get continue.{Off}")
             return True
         elif response.lower().strip() == 'n':
             print_registered_exp(expenses)
-            print(
-                f"\n{BYellow}Have a nice day! "
-                f"Feel free to come back anytime.{Off}\n")
+            print(f"\n{BYellow}Have a nice day! "
+                  f"Feel free to come back anytime.{Off}\n")
             return False
         else:
             print(
