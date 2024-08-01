@@ -1,7 +1,7 @@
 # Colors 
 
 # Reset
-Color_Off="\033[0m"       # Text Reset
+Off="\033[0m"       # Text Reset
 
 # Regular Colors
 Red="\033[0;31m"          # Red
