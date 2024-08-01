@@ -37,5 +37,5 @@ I have used the recommended [PEP8 CI Python Linter](https://pep8ci.herokuapp.com
 
 |  File | CI URL | Screenshot | Notes |
 |  --- | --- | --- | --- |
-|  |  [PEP8 CI](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/Mustafa-Vienna/budget_buddy/main/run.py) | ![pep8_run](documentation/screenshots/pep8_run.png) | No errors found|
-|  |  [PEP8 CI]() | ![pep8_colors](documentation/screenshots/pep8_colors.png) | No errors found |
+| run.py |  [PEP8 run CI](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/Mustafa-Vienna/budget_buddy/main/run.py) | ![pep8_run](documentation/screenshots/pep8_run.png) | No errors found|
+| colors.py |  [PEP8 colors CI](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/Mustafa-Vienna/budget_buddy/main/colors.py) | ![pep8_colors](documentation/screenshots/pep8_colors.png) | No errors found |

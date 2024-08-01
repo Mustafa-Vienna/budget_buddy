@@ -1,8 +1,7 @@
 # Budget Buddy
 
-![screenshot](documentation/demo.png)
+![screenshot](documentation/screenshots/clear_screen.png)
 
-source: [amiresponsive](https://ui.dev/amiresponsive?url=)
 
 ## Introduction
 

@@ -49,9 +49,6 @@ def display_welcome_msg():
     print("*      on a monthly basis. Print results   *")
     print("*               to the screen.             *")
     print("*                                          *")
-    print("*      📈 Please enter whole numbers        *")
-    print("*       only. No decimals, please!         *")
-    print("*                                          *")
     print("********************************************")
     print()
     print(
@@ -216,7 +213,7 @@ def register_expense_items(remaining_budget):
                 check_alphabets
                 )
     item_price = get_validated_input(
-                f"\nEnter the price for {item_name}: ",
+                f"\nEnter the price for {On_Blue}{item_name}{Off}: ",
                 check_item_price,
                 remaining_budget)
     print(
