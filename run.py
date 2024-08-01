@@ -142,8 +142,8 @@ def check_salary(value):
     try:
         value = float(value)
         if value < 1000:
-            raise ValueError(
-                f"\n{BRed}Invalid salary.{Off} {Red}Minimum is 1000 €!{Off}")
+            print(f"\n{Purple}Invalid salary.{Off} "
+                  f"{Red}Minimum is 1000 €!{Off}")
             return False
         elif not (1000 <= value <= 9999):
             print(f"\n{Purple}Enter a reasonable monthly "
