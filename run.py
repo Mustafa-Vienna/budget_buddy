@@ -55,11 +55,11 @@ def display_welcome_msg():
     print("********************************************")
     print()
     print(
-        f"\n{BPurple}Let's see if you are a Richie Rich 💷 or a "
-        f" Brokey Broke 😲 {Off}"
+        f"\n{BPurple}Let's see if you are a Richie Rich  💷  or a "
+        f" Brokey Broke  😲  {Off}"
         )
     print(
-        f"\n{BPurple}Richie Rich 💷 or Brokey Broke 😲? Let's find out! {Off}"
+        f"\n{BPurple}Richie Rich 💷  or Brokey Broke 😲   Let's find out!{Off}"
         )
     print()
     sleep(0.5)
@@ -78,10 +78,10 @@ def get_user_confirmation():
     """
     while True:
         response = input(
-            f"\n{Cyan}Start the game? (y/n): {Off}"
+            f"\n{Cyan}Start the game? (y/n): {Off}\n"
             )
         if response.lower().strip() == 'y':
-            print(f"\n{BGreen}Great! Let's started.{Off}")
+            print(f"\n{BGreen}Great! Let's started.{Off}\n")
             break
         elif response.lower().strip() == 'n':
             print(
@@ -90,7 +90,7 @@ def get_user_confirmation():
             sys.exit()
         else:
             print(
-                f"\n{BRed}Invalid input. Type 'y' or 'n'.{Off}"
+                f"\n{BRed}Invalid input. Type 'y' or 'n'.{Off}\n"
                 )
 
 
