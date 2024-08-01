@@ -224,7 +224,7 @@ def register_expense_items(remaining_budget):
                 )
     item_price = get_validated_input(
                 f"\nEnter the price for {item_name} "
-                f"{Red}(positive numbers only!){Color_Off}:",
+                f"{Red}(positive numbers only!){Color_Off}: ",
                 check_item_price,
                 remaining_budget)
     print(
@@ -254,7 +254,7 @@ def register_expense_items(remaining_budget):
             f"\n{BYellow}Please enter a number from the available "
             f"options{Color_Off}[1 - {len(cost_categories)}]: ",
             check_number)) - 1
-
+        
         if selected_index in range(len(cost_categories)):
             selected_category = cost_categories[selected_index]
             return Expense(item_name, selected_category, item_price)
@@ -307,7 +307,7 @@ def main():
         check_salary)
     saving_goals = get_validated_input(
         f"\nPlease enter your saving goals {Red}"
-        f"(must be positive and less than your"
+        f"(must be positive and less than your "
         f"salary {salary:.2f}€){Color_Off}: ",
         check_saving_goals,
         salary)
