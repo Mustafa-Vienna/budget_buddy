@@ -191,8 +191,8 @@ def check_alphabets(value):
     """
     Validate that the input consists only of alphabets.
     """
-    if not value.isalpha():
-        print(f"\n{Red}Enter letters only!{Off}")
+    if not all(char.isalpha() or char.isspace() for char in value):
+        print(f"\n{Red}Enter letters and spaces only!{Off}")
         return False
     return True
 
