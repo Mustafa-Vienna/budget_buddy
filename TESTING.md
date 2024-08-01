@@ -30,3 +30,12 @@ Manual testing was conducted to ensure that all functionalities work correctly a
 | Add More Items - Invalid Input   | Verified that invalid inputs are handled correctly and the user is prompted again.                                           | User is prompted again for valid input 'Y' or 'N'.                                               | Passed | ![Add More Items - Invalid](documentation/screenshots/add_more_items_invalid.png) |
 | End of Program                   | Ensured that the program exits gracefully and displays a goodbye message when the user chooses to exit.                      | Program exits with a goodbye message.                                                            | Passed | ![End of Program](documentation/screenshots/end_of_program.png) |
 
+
+## Code 
+
+I have used the recommended [PEP8 CI Python Linter](https://pep8ci.herokuapp.com) to validate all of my Python files.
+
+|  File | CI URL | Screenshot | Notes |
+|  --- | --- | --- | --- |
+|  |  [PEP8 CI](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/Mustafa-Vienna/budget_buddy/main/run.py) | ![pep8_run](documentation/screenshots/pep8_run.png) | No errors found|
+|  |  [PEP8 CI]() | ![pep8_colors](documentation/screenshots/pep8_colors.png) | No errors found |
