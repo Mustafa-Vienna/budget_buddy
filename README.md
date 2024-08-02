@@ -78,7 +78,49 @@ Budget Buddy was created as a part of a full-stack development program to demons
 
 ### Program Flowchart
 
-![Flowchart](documentation/flowchart.png)
+## Program Flowchart
+
+Below is a text-based representation of the flowchart for clarity:
+
+```plaintext
+Start
+ |
+ |-- Clear Screen
+ |-- Import colors.py
+ |-- Display Welcome Message
+ |
+ |-- Prompt: Start Game? (Yes/No)
+     |
+     |-- [Yes] --|
+     |           |-- Display Start Message
+     |           |-- Prompt: Enter Salary
+     |           |-- Validate Salary
+     |           |     |-- [Invalid] -- Display Error Message, Prompt Again
+     |           |-- Prompt: Enter Saving Goals
+     |           |-- Validate Saving Goals
+     |           |     |-- [Invalid] -- Display Error Message, Prompt Again
+     |           |-- Calculate and Display Available Budget
+     |           |-- Expense Input Loop
+     |           |     |-- Prompt: Enter Expense Item Name
+     |           |     |-- Validate Item Name
+     |           |     |     |-- [Invalid] -- Display Error Message, Prompt Again
+     |           |     |-- Prompt: Enter Expense Item Price
+     |           |     |-- Validate Item Price
+     |           |     |     |-- [Invalid] -- Display Error Message, Prompt Again
+     |           |     |-- Prompt: Select Expense Category
+     |           |     |-- Calculate and Display Remaining Budget
+     |           |     |-- [Remaining Budget Zero] -- Display Zero Credits Message, End Game
+     |           |     |-- Prompt: Add More Items? (Yes/No)
+     |           |     |     |-- [Yes] -- Continue Expense Input Loop
+     |           |     |     |-- [No] -- Display Summary, Exit with Goodbye Message
+     |
+     |-- [No] --|
+     |           |-- Display Goodbye Message, End Game
+     |
+     |-- [Invalid Input] -- Display Error Message, Prompt Again
+
+
+![Flowchart](documentation/screenshots/flowchart.png)
 
 [Go to Contents](#contents)
 
