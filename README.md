@@ -118,10 +118,10 @@ Start
      |           |-- Display Goodbye Message, End Game
      |
      |-- [Invalid Input] -- Display Error Message, Prompt Again
+```
 
 
 ![Flowchart](documentation/screenshots/flowchart.png)
-
 [Go to Contents](#contents)
 
 ## Features
