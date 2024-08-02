@@ -80,6 +80,8 @@ Budget Buddy was created to provide users with an efficient way to manage their 
 Below is a text-based representation of the flowchart for clarity:
 
 ![Flowchart](documentation/screenshots/flowchart.png)
+
+
 [Go to Contents](#contents)
 
 ## Features
@@ -140,6 +142,8 @@ Below is a text-based representation of the flowchart for clarity:
 - Aggregate income and expense data.
 - Allow export in formats such as PDF, Excel, or CSV.
 
+[Go to Contents](#contents)
+
 ### Savings Goals Tracking
 
 **Description:** 
@@ -151,6 +155,8 @@ Below is a text-based representation of the flowchart for clarity:
 **Implementation Plan:**
 - Develop goal setting and progress tracking features.
 - Add reminders and notifications.
+
+[Go to Contents](#contents)
 
 ### Expense Alerts
 
@@ -164,6 +170,8 @@ Below is a text-based representation of the flowchart for clarity:
 - Allow users to set spending thresholds.
 - Develop an alert system for budget limits.
 
+[Go to Contents](#contents)
+
 ### Multi-Income Source Support
 
 **Description:**
@@ -176,7 +184,10 @@ Below is a text-based representation of the flowchart for clarity:
 - Develop features to input and categorize various income sources.
 - Create summary views of total income.
 
+[Go to Contents](#contents)
+
 ### Data Storage Integration with Google Sheets
+
 
 **Description:**
 - Store and manage data in Google Sheets with sync options.
@@ -188,7 +199,10 @@ Below is a text-based representation of the flowchart for clarity:
 - Integrate Google Sheets API for data storage and management.
 - Develop a sync feature for updating data.
 
+[Go to Contents](#contents)
+
 ### Web Interface with HTML and CSS
+
 
 **Description:**
 - Create a web-based interface using HTML and CSS.
@@ -201,6 +215,9 @@ Below is a text-based representation of the flowchart for clarity:
 **Implementation Plan:**
 - Use HTML and CSS for web development.
 - Implement responsive design techniques.
+
+[Go to Contents](#contents)
+
 
 ### Date and Time Management for Budget Tracking
 
@@ -293,6 +310,13 @@ I deployed the Budget Buddy using Heroku's dashboard. Here’s how I did it:
 - **[Dave Gray](https://www.youtube.com/watch?v=qwAFL1597eM&t=22910s)**: Very handy for beginners like me in Python. The 8-hour long tutorial explains everything from zero to advanced concepts
 
 - **[FreeCodeCamp](https://www.youtube.com/watch?v=pdy3nh1tn6I&t=8427s)**: Very handy for beginners like me in Python. Includes 20 small projects with python
+
+- **[Programming with Mosh](https://www.youtube.com/watch?v=kqtD5dpn9C8)**: This 1-hour tutorial explains core concepts of Python for beginners, providing a solid foundation.
+
+- **[YouTube Tutorial](https://www.youtube.com/watch?v=Dn1EjhcQk64&t=1411s)**: Learned how to use `raise` error and handle exceptions effectively.
+
+
+[Go to Contents](#contents)
 
 ### Code Used
 
