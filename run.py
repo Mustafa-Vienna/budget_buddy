@@ -16,6 +16,9 @@ class Expense:
     """
 
     def __init__(self, item, category, price):
+        """
+        Initializes an Expense object.
+        """
         self.item = item
         self.category = category
         self.price = price
@@ -40,6 +43,9 @@ def clear_screen():
 
 
 def display_welcome_msg():
+    """
+    Displays a welcome message to the user.
+    """
     print()
     print(f"{Yellow}********************************************")
     print("*                                          *")
@@ -68,7 +74,7 @@ def display_welcome_msg():
 
 def get_user_confirmation():
     """
-    Get user confirmation to start the game
+    Get user confirmation to start the program.
     """
     while True:
         response = input(f"\n{Cyan}Start the game? (y/n): {Off}")
@@ -95,15 +101,20 @@ def get_validated_input(prompt, validation_function, *args):
     Validate user input using the specified validation function
     """
     while True:
+        # To remove any leading/trailing whitespace
         user_input = input(prompt).strip()
+# Check if the input is empty
         if not user_input:
             print(
                 f"\n{On_Purple}Please enter a value, "
-                f"this field cannot be empty!{Off}"
-                )
+                f"this field cannot be empty!{Off}")
+# If the input is empty, prompt the user again
             continue
+# Call the validation function with the input and any additional arguments
         if validation_function(user_input, *args):
             return (
+                # If the input is valid and the validation function is
+                # one of the specified functions, convert input to float
                 float(user_input)
                 if validation_function in [
                     check_number,
@@ -197,7 +208,7 @@ def check_alphabets(item_name):
         return False
     elif not 2 <= len(item_name) <= 15:
         print(f"\n{Red}Item name must be more then 2 letters "
-              f"and less then 15 numbers including spaces. {Off}")
+              f"and less then 15 letters including spaces. {Off}")
         return False
     return True
 
@@ -252,6 +263,9 @@ def register_expense_items(remaining_budget):
 
 
 def print_registered_exp(expenses):
+    """
+    Print the registered expenses
+    """
     print(f"\n{BPurple}Here are your registered expenses:{Off}")
     for exp in expenses:
         print(exp)
