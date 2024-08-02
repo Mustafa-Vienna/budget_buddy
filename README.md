@@ -4,14 +4,11 @@
 
 [Live project here](https://budget-buddy-pp3-4bd1f0ed3b49.herokuapp.com/)
 
-[Go to Contents](#contents)
-
 
 ## Introduction
 
 **Budget Buddy** is a user-friendly application designed to help users manage their monthly budget by tracking income and expenses. This project aims to provide an intuitive and interactive way for individuals to monitor their finances and make informed financial decisions.
 
-[Go to Contents](#contents)
 
 ## Contents
 
@@ -25,7 +22,7 @@
    * [Budget Calculation](#budget-calculation)
    * [Immediate Feedback](#immediate-feedback)
    * [Expense Category Selection](#expense-category-selection)
-* [Future Features](#future-features)
+   * [Future Development Plan](#future-development-plan)
    * [Detailed Reports](#detailed-reports)
    * [Savings Goals Tracking](#savings-goals-tracking)
    * [Expense Alerts](#expense-alerts)
@@ -33,10 +30,11 @@
    * [Data Storage Integration with Google Sheets](#data-storage-integration-with-google-sheets)
    * [Web Interface with HTML and CSS](#web-interface-with-html-and-css)
    * [Date and Time Management for Budget Tracking](#date-and-time-management-for-budget-tracking)
+* [Testing](#testing)
+* [Bugs](#bugs)
 * [Technologies Used](#technologies-used)
-* [Data Model](#data-model)
-   * [Classes & Functions](#classes--functions)
-* [Python Packages Used](#python-packages-used)
+* [Version Control](#version-control)
+* [Deployment](#deployment)
 * [Credits](#credits)
    * [Code Used](#code-used)
 * [Acknowledgements](#acknowledgements)
@@ -54,10 +52,10 @@
 ## User Stories
 
 ### Background
-Budget Buddy was created as a part of a full-stack development program to demonstrate Python programming skills. The application provides a simple yet effective way to track a single income source (salary) and various expenses. It aims to help users manage their monthly budget efficiently by offering clear insights into their spending habits. The project also includes enhancements such as color-coded messages and styled terminal outputs to improve readability and user experience.
+Budget Buddy was created to provide users with an efficient way to manage their monthly budget. The application allows users to track a single income source (salary) and various expenses, helping them gain clear insights into their spending habits. It includes features like color-coded messages and styled terminal outputs to enhance readability and user experience.
 
 ### Motivations and Goals
-- **Project Purpose:** This Python script was created as part of a full-stack development program. The project demonstrates skills in Python by developing a simple budget calculating application.
+- **Project Purpose:** This Python script was created to help individuals manage their finances more effectively. The project demonstrates skills in Python by developing a simple yet powerful budget calculating application, enabling users to track their income and expenses, set financial goals, and make informed financial decisions.
 - **Financial Organization:** Users aim to keep their finances well-organized by tracking a single income source (salary) and various expenses.
 - **Time Management:** They seek tools that help them quickly and efficiently manage budgeting tasks.
 - **Financial Insights:** They appreciate tools that provide clear insights into spending habits and assist in making informed financial decisions.
@@ -76,50 +74,10 @@ Budget Buddy was created as a part of a full-stack development program to demons
 
 [Go to Contents](#contents)
 
-### Program Flowchart
 
 ## Program Flowchart
 
 Below is a text-based representation of the flowchart for clarity:
-
-```plaintext
-Start
- |
- |-- Clear Screen
- |-- Import colors.py
- |-- Display Welcome Message
- |
- |-- Prompt: Start Game? (Yes/No)
-     |
-     |-- [Yes] --|
-     |           |-- Display Start Message
-     |           |-- Prompt: Enter Salary
-     |           |-- Validate Salary
-     |           |     |-- [Invalid] -- Display Error Message, Prompt Again
-     |           |-- Prompt: Enter Saving Goals
-     |           |-- Validate Saving Goals
-     |           |     |-- [Invalid] -- Display Error Message, Prompt Again
-     |           |-- Calculate and Display Available Budget
-     |           |-- Expense Input Loop
-     |           |     |-- Prompt: Enter Expense Item Name
-     |           |     |-- Validate Item Name
-     |           |     |     |-- [Invalid] -- Display Error Message, Prompt Again
-     |           |     |-- Prompt: Enter Expense Item Price
-     |           |     |-- Validate Item Price
-     |           |     |     |-- [Invalid] -- Display Error Message, Prompt Again
-     |           |     |-- Prompt: Select Expense Category
-     |           |     |-- Calculate and Display Remaining Budget
-     |           |     |-- [Remaining Budget Zero] -- Display Zero Credits Message, End Game
-     |           |     |-- Prompt: Add More Items? (Yes/No)
-     |           |     |     |-- [Yes] -- Continue Expense Input Loop
-     |           |     |     |-- [No] -- Display Summary, Exit with Goodbye Message
-     |
-     |-- [No] --|
-     |           |-- Display Goodbye Message, End Game
-     |
-     |-- [Invalid Input] -- Display Error Message, Prompt Again
-```
-
 
 ![Flowchart](documentation/screenshots/flowchart.png)
 [Go to Contents](#contents)
@@ -129,8 +87,7 @@ Start
 ### Welcome Message
 
 **Description:** Greets the user and provides an overview of the application.  
-**Value:** Sets a friendly tone and informs users about the purpose of the application.  
-**Implementation:** Implemented in the `display_welcome_msg` function.  
+**Value:** Sets a friendly tone and informs users about the purpose of the application.    
 ![Welcome Message](documentation/screenshots/clear_screen.png)
 
 [Go to Contents](#contents)
@@ -139,7 +96,6 @@ Start
 
 **Description:** Allows users to enter descriptions, categories, and amounts for their expenses.  
 **Value:** Provides a structured way for users to record their spending.  
-**Implementation:** Implemented in the `register_expense_items` function.  
 ![Expense Input](documentation/screenshots/end_of_program.png)
 
 [Go to Contents](#contents)
@@ -148,7 +104,6 @@ Start
 
 **Description:** Calculates the remaining budget after each expense entry.  
 **Value:** Helps users stay aware of their financial status in real-time.  
-**Implementation:** Implemented within the main application logic.  
 ![Budget Calculation](documentation/screenshots/expense_item_price_valid.png)
 
 [Go to Contents](#contents)
@@ -157,7 +112,6 @@ Start
 
 **Description:** Provides instant updates on the remaining budget after each expense entry.  
 **Value:** Reinforces financial awareness and helps users make informed decisions.  
-**Implementation:** Implemented in the main application loop.  
 ![Immediate Feedback](documentation/screenshots/add_more_items_yes.png)
 
 [Go to Contents](#contents)
@@ -166,12 +120,11 @@ Start
 
 **Description:** Allows users to categorize their expenses for better organization.  
 **Value:** Helps users see where their money is going by categorizing expenses.  
-**Implementation:** Implemented in the `register_expense_items` function.  
 ![Expense Category Selection](documentation/screenshots/end_of_program.png)
 
 [Go to Contents](#contents)
 
-## Future Features
+## Future Development Plan
 
 ### Detailed Reports
 
@@ -264,6 +217,26 @@ Start
 
 [Go to Contents](#contents)
 
+## Testing
+
+I conducted extensive manual testing of the Budget Buddy application to ensure its functionality and reliability. Here's an overview of the testing process and outcomes:
+
+- **Manual Testing**: I personally tested the application multiple times on different devices and environments to verify its performance. This testing included various scenarios, both positive and negative, to ensure all input validations were thoroughly checked and functioning as expected.
+
+
+- **Peer Review**:  shared the application with friends, classmates, requesting their feedback and insights. They tested various features and provided valuable input on usability and functionality.
+
+> <span style="font-weight: bold; color: yellow;">NOTE</span>  
+> Return back to the [TESTING.md](TESTING.md) file.
+
+[Go to Contents](#contents)
+
+## Bugs
+
+Initially, the Budget Buddy project started with three main functions, which caused various errors. To resolve these, I refactored the code into multiple small, isolated functions for specific input types. Now, there are no noticeable bugs to report.
+
+[Go to Contents](#contents)
+
 ## Technologies Used
 
 - **Markdown Builder:** Used to generate README and TESTING templates.
@@ -272,57 +245,65 @@ Start
 - **Gitpod:** Used as a cloud-based IDE for development.
 - **Python:** Used as the back-end programming language.
 - **Heroku:** Used for hosting the deployed back-end site.
-- **ChatGPT:** Used to help debug, troubleshoot, and explain things, and help me write a more clear and concise README.md file.
+- **VS Code:** Used as a local development environment.
+- **pylint:** Used for code quality and style checking in Python.
 
 [Go to Contents](#contents)
 
 
-## Data Model
+## Version Control
 
-### Classes & Functions
+Throughout the development process, I used basic Git commands to manage version control. All necessary files were included in the repository. Here are the main commands I used:
 
-The Budget Buddy project uses various functions to modularize the code, ensuring reusability, maintainability, and clarity. Here is an overview of the primary functions used in this application:
-
-- `clear_screen()`: Clears the terminal to maintain a clean user interface.
-- `display_welcome_msg()`: Displays a welcome message to the user.
-- `get_user_confirmation()`: Confirms if the user wants to start the budgeting process.
-- `add_more_item()`: Prompts the user to add more items after the first round.
-- `get_validated_input(prompt, validation_function, *args)`: Validates user input using the specified validation function.
-- `register_expense_items(available_budget, saving_goals)`: Collects user expense items and categorizes them.
+- `git add 'file_name'`: Added specific files to the staging area before committing changes.
+- `git add .`: Added all files to the staging area before committing changes.
+- `git commit -m "commit message"`: Committed the staged changes with descriptive messages to track project progress.
+- `git push`: Pushed local commits to the remote repository on GitHub, ensuring the latest changes were synchronized with the online repository.
 
 [Go to Contents](#contents)
 
-## Python Packages Used
+## Deployment
 
-The Budget Buddy application relies on the following Python packages for its functionality:
+I deployed the Budget Buddy using Heroku's dashboard. Here’s how I did it:
 
-- **os**: Used for system-specific operations and clearing the terminal.
-- **sys**: Utilized for system-specific parameters and functions.
-- **time**: Used to add delays (`sleep(0.5)`) for displaying messages right after the welcome message.
-- **colors**: Custom module for adding color to terminal output.
-
+1. **Creating a Heroku App**: Logged into Heroku, created a new app, and chose a unique name and region.
+2. **Connecting to GitHub**: Linked my GitHub account and selected the Budget Buddy repository.
+3. **Configuring Environment Variables**: Set necessary environment variables in the "Settings" tab.
+4. **Installing Buildpacks**: Added Python and Node.js buildpacks in the "Buildpacks" section to handle dependencies.
+5. **Configuring Automatic Deploys**: Enabled automatic deploys for seamless updates from GitHub.
+6. **Manual Deployments**: Used the manual deploy option to deploy specific branches when needed.
+7. **Verifying Deployment**: Verified the deployment by opening the provided Heroku URL and checking the app.
 
 [Go to Contents](#contents)
 
 ## Credits
 
-### Libraries and Tools
+### Resources Used
 
-- **os**: Used for system-specific operations and clearing the terminal.
-- **sys**: Utilized for system-specific parameters and functions.
-- **time**: Provides various time-related functions.
-- **colors**: Custom module for adding color to terminal output, imported from `colors.py` file
+- **[Code Institute learning materials](https://codeinstitute.net/)**: For providing helpful learning resources and guidance during the development process.
 
-[Go to Contents](#contents)
+- **[Python documentation](https://www.python.org/doc/)**: For offering detailed explanations and references that helped me implement different features.
+
+- **[W3Schools Python exercises](https://www.w3schools.com/python/)**: For providing practical exercises and tutorials that reinforced my Python skills.
+
+- **[Heroku](https://www.heroku.com/)**: For offering easy-to-use deployment and hosting services for the application.
+
+- **[Github repo](https://github.com/ibra8080/ArabiaChallenge)**: file structure and approach were inspired by this repository. This repo provided a comprehensive guide on how to document testing processes, which I have implemented similarly in my project.
+
+- **[Dave Gray](https://www.youtube.com/watch?v=qwAFL1597eM&t=22910s)**: Very handy for beginners like me in Python. The 8-hour long tutorial explains everything from zero to advanced concepts
+
+- **[FreeCodeCamp](https://www.youtube.com/watch?v=pdy3nh1tn6I&t=8427s)**: Very handy for beginners like me in Python. Includes 20 small projects with python
 
 ### Code Used
+
+- **[GeeksforGeeks](https://www.geeksforgeeks.org/clear-screen-python/)**: Learned how to implement the `clear_screen` function from this link.
 
 - [Github repo](https://gist.github.com/vratiu/9780): The `colors.py` Color codes were sourced from this repository.
 
 - [Github repo](https://github.com/linuxlawson/buddy/blob/main/buddy.py): The `display_welcome_msg` method was inspired by this repository.
 
-- [Github repo](https://github.com/ibra8080/ArabiaChallenge): file structure and approach were inspired by this repository. This repo provided a comprehensive guide on how to document testing processes, which I have implemented similarly in my project.
 
+[Go to Contents](#contents)
 
 ## Acknowledgements
 
@@ -332,10 +313,14 @@ I deeply thank my mentor, Luke, for his invaluable support and guidance from sta
 
 ### Ioan
 
-Huge thanks to my friend and classmate, Ioan, for his programming expertise. He helped me manage complex functions by suggesting smaller sub-functions, making my work easier. Ioan is like a real-life ChatGPT with his knowledge and clear explanations. I'm lucky to have him as a friend!
+Huge thanks to my friend and classmate, Ioan, for his programming expertise. He suggested using smaller functions and explained the benefits of isolating them. This made a huge difference in my project, making the code clearer and easier to maintain. Ioan is like a real-life ChatGPT with his knowledge and clear explanations. I'm lucky to have him as a friend!
 
 ### Lorenz
 
 Thanks to my classmate, Lorenz, for his detailed help with PEP8 issues in my Python code. He taught me various ways to format code properly and provided excellent resources. His guidance made using PEP8 for code checking much easier. 
+
+### ChatGPT
+
+Used to help debug, troubleshoot, and explain things, and help me write a more clear and concise README.md file.
 
 [Go to Contents](#contents)
